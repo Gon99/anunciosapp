@@ -5,13 +5,32 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
     const loginApiEndpoint = `${baseURL}/login`;
     const getAdsApiEndpoint = `${baseURL}/anuncios`;
     return {
-        registerUser: (data) => (
+        registerUser: async data => {
+            try {
+                const response = await axios({
+                    method: 'post',
+                    url: registerApiEndpoint,
+                    withCredentials: true,
+                    data: {
+                        username: data.username,
+                        password: data.password
+                    }
+                })
+                if (response.data){
+                    return response.data;
+                }
+                return response;
+            } catch (error) {
+                return error;
+            }
+        }
+        /*registerUser: (data) => (
             fetch(`${registerApiEndpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify (data)
+                body: JSON.stringify(data)
             })
             .then((response) => {
                 return response.json();
@@ -19,7 +38,7 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
             .catch((err) => {
                 throw err;
             })
-        ),
+        )*/,
         /*loginUser: (data) => (
             fetch(`${loginApiEndpoint}`, {
                 credentials: 'include',
@@ -50,7 +69,7 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
                 if(response.data){
                     return response.data;
                 }
-                return response;
+                return response; 
             } catch (error) {
                 return error;
             }
@@ -71,6 +90,7 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
                 const response = await axios({
                     method:'get',
                     url: getAdsApiEndpoint,
+                    withCredentials: true
                 })
                 console.log("ads response:",response);
                 return response;

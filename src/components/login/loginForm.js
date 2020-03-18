@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../api/api';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import './loginForm.css';
 
 //const axios = require('axios').default;
 const { loginUser } = api();
@@ -68,20 +69,16 @@ class LoginUser extends Component {
       message = <p style={{color:"#E8271C"}}>The user doesnt exist</p>;
     }
     return (
-      <div>
+      <div className="center">
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name="username" value={this.state.name} onChange={this.handleUserInput}/>
-          </label>
-          <br></br>
-          <label>
-            Password:
-            <input type="password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
-          </label>
-          <br></br>
-          <input type="submit" value="Submit"/>
+          <div className="inputDiv">
+            <input placeholder="Write your username" type="text" name="username" value={this.state.name} onChange={this.handleUserInput}/>
+          </div>
+          <div className="inputDiv">
+            <input placeholder="Write your password" type="password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
+          </div>
+          <input className="submit" type="submit" value="Submit"/>
           <p>Youre not registered, click <Link to="/register">here</Link></p>
           <p isLogged={isLogged}>{message}</p>
         </form>

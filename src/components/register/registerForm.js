@@ -57,21 +57,17 @@ class RegisterUser extends Component {
       message = <p style={{color:"#E8271C"}}>{serverResponse.message}</p>;
     }
     return (
-      <div>
+      <div className="center">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name="username" value={this.state.name} onChange={this.handleUserInput}/>
-          </label>
-          <br></br>
-          <label>
-            Password
-            <input type="password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
-          </label>
-          <br></br>
-          <input type="submit" value="Submit"/>
-          <p>You are already registered, click <Link to="/login">here</Link></p>
+          <div class="inputDiv">
+            <input placeholder="Write your username" type="text" name="username" value={this.state.name} onChange={this.handleUserInput}/>
+          </div>
+          <div class="inputDiv">
+            <input placeholder="Write your password" type="password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
+          </div>
+          <input className="submit" type="submit" value="Submit"/>
+          <p>You are already registered, click <Link to="/">here</Link></p>
           <p id="registered" isRegistered={isRegistered}>{message}</p>
         </form>
       </div>

@@ -12,9 +12,9 @@ class App extends Component {
       <ErrorHandler>
         <Router>
           <Switch>
+            <Route exact={true} path="/" component={LoginForm}/>
             <Route path="/register" component={RegisterForm}/>
-            <Route path="/login" component={LoginForm}/>
-            <Route exact={true} path="/" component={AdsList}/>
+            <Route path="/ads" component={AdsList}/>
             
           </Switch>
         </Router>
