@@ -19,7 +19,7 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
                 if (response.data){
                     return response.data;
                 }
-                return response;
+                return response;    
             } catch (error) {
                 return error;
             }
@@ -90,7 +90,6 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
                 const response = await axios({
                     method:'get',
                     url: getAdsApiEndpoint,
-                    withCredentials: true
                 })
                 console.log("ads response:",response);
                 return response;
