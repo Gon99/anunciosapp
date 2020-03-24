@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import api from '../api/api';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as  Router, Route, Link, Switch, withRouter } from "react-router-dom";
 import './loginForm.css';
 
 //const axios = require('axios').default;
 const { loginUser } = api();
-const { getAds } = api();
 
 class LoginUser extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class LoginUser extends Component {
     };
   }
 
-  handleSubmit = async event => {
+  handleSubmit = async (event, props) => {
     event.preventDefault();
     const loginResponse = await loginUser(this.state);
     if(loginResponse.success === true){
@@ -32,8 +31,7 @@ class LoginUser extends Component {
         isLogged: false
       })
     }
-    const getAdsReq = getAds();
-    console.log("resp",getAdsReq);
+    this.props.history.push("/ads");
     /*console.log("repsuesta login: ",responseLogin);
     const getAdsReq = getAds();
     console.log("ADS:",getAdsReq);
@@ -87,4 +85,4 @@ class LoginUser extends Component {
   }
 }
 
-export default LoginUser;
+export default withRouter(LoginUser);
