@@ -99,28 +99,32 @@ class AdsList extends Component{
         const allAds = this.state.ads;
         const AdsList = allAds.map((result) => {
             return (
-                <div key={result._id}>
-                    <h1>{result.name}</h1>
+                <div className="topPadding" key={result._id}>
+                    <h2>{result.name}</h2>
                     <img src={result.photo}></img>
                     <p>{result.description}</p>
                     <p>{result.price}€</p>
-                    <button onClick={() => this.goDetail(result._id)}>Detail</button>
-                    <button onClick={() => this.goEdit(result._id)}>Edit</button>
+                    <button class="button" onClick={() => this.goDetail(result._id)}>Detail</button>
+                    <button class="button" onClick={() => this.goEdit(result._id)}>Edit</button>
                 </div>
             );
         });
         return (
-            <div>
-                <p>Filter Ads by Tag:</p>
-                <select onChange={this.handleDropdown}>{this.state.tags.map((tag, y) =>
+            <div className="main">
+                <h1>Filters</h1>
+                <p className="tags">Filter Ads by Tag:</p>
+                <select className="tags" onChange={this.handleDropdown}>{this.state.tags.map((tag, y) =>
                 <option key={y}>{tag}</option>)}</select>
-                <form onSubmit={this.handleSearchSubmit}>
+                <form className="searchS" onSubmit={this.handleSearchSubmit}>
                     <div>
                         <input type="text" placeholder="Search" name="search" value={this.state.search} onChange={this.handleSearch}></input>
                         <input type="submit" value="Submit"></input>
                     </div>
                 </form>
+                <br></br>
+                <h1>Create your ad</h1>
                 <button onClick={this.goCreateAd}>Create Ad</button>
+                <h1>All Ads</h1>
                 {AdsList}
             </div>
         );

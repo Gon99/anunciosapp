@@ -32,20 +32,6 @@ class LoginUser extends Component {
       })
     }
     this.props.history.push("/ads");
-    /*console.log("repsuesta login: ",responseLogin);
-    const getAdsReq = getAds();
-    console.log("ADS:",getAdsReq);
-    responseLogin.then(result => {
-      if (result.success === true){ 
-        this.setState({
-          isLogged: true
-        })
-      }else{
-        this.setState({
-          isLogged: false
-        })
-      }
-    })*/
   }
 
   handleUserInput = event => {

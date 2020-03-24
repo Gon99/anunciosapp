@@ -20,7 +20,6 @@ class CreateAd extends Component {
 
     getTags = async () => {
         const tags = await getTags();
-        console.log("tags", tags);
         if (tags){
             for (let index = 0; index < tags.length; index++) {
                 if (tags[index]){
@@ -39,42 +38,40 @@ class CreateAd extends Component {
     }
 
     componentDidMount(){
-        console.log("entro");
         this.getTags();
     }
 
     handleCreation = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log("name: ", name);
-        console.log("value: ", value);
         this.setState({
             [name]: value
         })
-        console.log("estado general: ", this.state);
     }
 
     createAd = async (event) => {
         event.preventDefault();
         const response = await createAd(this.state);
-        console.log("la respuesta, ", response);
     }
 
     render(){
         return (
-            <div>
+            <div className="main topPadding">
                 <h1>Ad Creation</h1>
                 <form onSubmit={this.createAd}>
                     <label>Name: </label>
-                    <input type="text" name="name" value={this.state.name} onChange={this.handleCreation}></input>
+                    <input placeholder="Name" type="text" name="name" value={this.state.name} onChange={this.handleCreation}></input>
+                    <br></br>
                     <br></br>
                     <label>Description: </label>
-                    <input type="text" name="description" value={this.state.description} onChange={this.handleCreation}></input>
+                    <input placeholder="Description" type="text" name="description" value={this.state.description} onChange={this.handleCreation}></input>
+                    <br></br>
                     <br></br>
                     <label>Tags: </label>
                     <select name="tag" onChange={this.handleCreation}>{this.state.tags.map((tag, y)=>
                         <option key={y}>{tag}</option>
                     )}</select>
+                    <br></br>
                     <br></br>
                     <label>Type: </label>
                     <select name="type" onChange={this.handleCreation}>
@@ -82,15 +79,19 @@ class CreateAd extends Component {
                         <option key="sell">sell</option>
                     </select>
                     <br></br>
+                    <br></br>
                     <label>Price: </label>
-                    <input type="text" pattern="[0-9]*" name="price" value={this.state.price} onChange={this.handleCreation}></input>
+                    <input placeholder="Price €" type="text" pattern="[0-9]*" name="price" value={this.state.price} onChange={this.handleCreation}></input>
+                    <br></br>
                     <br></br>
                     <label>Photo: </label>
-                    <input type="file" name="photo" onChange={this.handleCreation}/>
+                    <input type="text" name="photo" placeholder="URL Image" onChange={this.handleCreation}/>
+                    <br></br>
                     <br></br>
                     <input type="submit" value="Create Ad"/>
                 </form>
-                <button onClick={this.goBack}>Back</button>
+                <br></br>
+                <button className="button" onClick={this.goBack}>Back</button>
             </div>
         )
     }

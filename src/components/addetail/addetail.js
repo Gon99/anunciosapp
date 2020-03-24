@@ -32,13 +32,12 @@ class AdDetail extends Component {
 
     render() {
         const item = this.state.item;
-        console.log(item);
         let date = item.createdAt;
         if (date){
             date = date.substring(0, 10);
         }
         return (
-            <div>
+            <div className="main topPadding">
                 <h1>{item.name}</h1>
                 <img src={item.photo}></img>
                 <p>Fecha de publicación {date}</p>
@@ -46,7 +45,7 @@ class AdDetail extends Component {
                 <p>{item.description}</p>
                 <h2>Precio</h2>
                 <p>{item.price}€</p>
-                <button onClick={this.goBack}>Back</button>
+                <button className="button" onClick={this.goBack}>Back</button>
             </div>
         )
     }

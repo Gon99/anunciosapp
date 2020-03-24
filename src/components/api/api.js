@@ -84,6 +84,9 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
                         name: data.name,
                         price: data.price,
                         description: data.description,
+                        tags: data.tag,
+                        type: data.type,
+                        photo: data.photo
                     }
                 })
             } catch (error) {
@@ -118,7 +121,6 @@ const api = (baseURL = 'http://34.89.93.186:8080/apiv1') => {
                         tags: data.tag,
                         type: data.type,
                         photo: data.photo
-                        //photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Kranh%C3%A4user_Cologne%2C_April_2018_-01.jpg/1280px-Kranh%C3%A4user_Cologne%2C_April_2018_-01.jpg'
                     }
                 })
                 if (response.data){

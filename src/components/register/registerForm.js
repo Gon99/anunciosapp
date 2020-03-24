@@ -3,9 +3,6 @@ import api from '../api/api';
 import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
 
 const { registerUser } = api();
-let serverResponse = {
-  message: ''
-}
 
 class RegisterUser extends Component {
   constructor(props) {
@@ -14,7 +11,8 @@ class RegisterUser extends Component {
     this.state = {
       username: '',
       password: '',
-      isRegistered: null
+      isRegistered: null,
+      serverResponse: ''
     }
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,15 +20,14 @@ class RegisterUser extends Component {
 
   handleSubmit = event => {
     const responseRegister = registerUser(this.state);
-    console.log("antes del then: ",responseRegister);
     responseRegister.then(result => {
       if (result.success === true) {
         this.setState({
           isRegistered: true
         })
       }else {
-        serverResponse.message = result.error;
         this.setState({
+          serverResponse: result.error,
           isRegistered: false
         })
       }
@@ -53,8 +50,8 @@ class RegisterUser extends Component {
 
     if (isRegistered === true) {
       message = <p style={{color:"#09E830"}}>The user has been registered correctly</p>
-    }else if(isRegistered === false){
-      message = <p style={{color:"#E8271C"}}>{serverResponse.message}</p>;
+    }else {
+      message = <p style={{color:"#E8271C"}}>{this.state.serverResponse}</p>;
     }
     return (
       <div className="center">
@@ -65,10 +62,11 @@ class RegisterUser extends Component {
           </div>
           <div class="inputDiv">
             <input placeholder="Write your password" type="password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
-          </div>
+          
           <input className="submit" type="submit" value="Submit"/>
           <p>You are already registered, click <Link to="/">here</Link></p>
           <p id="registered" isRegistered={isRegistered}>{message}</p>
+          </div>
         </form>
       </div>
     );
