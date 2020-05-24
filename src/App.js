@@ -6,7 +6,7 @@ import AdsList from './components/adslist/adslist';
 import AdDetail from './components/addetail/addetail';
 import AdEdit from './components/adedit/adedit';
 import CreateAd from './components/createad/createad';
-import { BrowserRouter as Router, Route, Link, Redirect, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 //import { Router, Route, Switch } from 'react-router';
 
 class App extends Component {
@@ -17,7 +17,15 @@ class App extends Component {
           <Switch>
             <Route exact={true} path="/" component={LoginForm}/>
             <Route path="/register" component={RegisterForm}/>
-            <Route path="/ads" component={AdsList}/>
+            {/*<Route path="/ads" component={AdsList}/>*/}
+            <Route
+              path="/ads"
+              render={props => (
+                <AdsList
+                  {...props}
+                />
+              )}
+            ></Route>
             <Route path="/detail" component={AdDetail}/>
             <Route path="/edit" component={AdEdit}/>
             <Route path="/createad" component={CreateAd}/>

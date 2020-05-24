@@ -19,8 +19,8 @@ class AdsList extends Component{
     }
 
     getTags = async () => {
-        const tagsPromise = getTags();
-        const tagsResponse = await tagsPromise;
+        const tagsResponse = await getTags();
+        console.log("tags:", tagsResponse);
         if (tagsResponse){
             for (let index = 0; index < tagsResponse.length; index++) {
                 if (tagsResponse[index]){

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api/api';
-import { BrowserRouter as  Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Link, withRouter } from "react-router-dom";
 import './loginForm.css';
 
 //const axios = require('axios').default;
@@ -22,6 +22,7 @@ class LoginUser extends Component {
   handleSubmit = async (event, props) => {
     event.preventDefault();
     const loginResponse = await loginUser(this.state);
+
     if(loginResponse.success === true){
       this.setState({
         isLogged: true

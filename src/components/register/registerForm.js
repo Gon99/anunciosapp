@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../api/api';
-import { BrowserRouter as Router, Route, Link, Switch, withRouter } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 
 const { registerUser } = api();
 

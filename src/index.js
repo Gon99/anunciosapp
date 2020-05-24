@@ -1,10 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import { createBrowserHistory } from 'history';
 import './components/register/registerForm.css';
 
+import './index.css';
+import Root from './components/Root';
+import { configureStore } from './store';
+import Ads from './components/adslist';
+
+const history = createBrowserHistory();
+const store = configureStore({ Ads, history })();
+
 ReactDOM.render(
-  <App />,
+  <Root store={store} history={history} />,
   document.getElementById('root')
 );
