@@ -1,0 +1,1 @@
+export { default as AdsService} from './index';

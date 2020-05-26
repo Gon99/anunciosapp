@@ -10,23 +10,21 @@ const createRootReducer = ({ history }) =>
     combineReducers({
         router: connectRouter(history),
         ...reducers,
-    })
+    });
 
-const configureMiddleware = config => {
+const configureMiddleware = config => [
     ReduxThunk.withExtraArgument(config),
     ReduxLogger
-}
+];
 
 const composeEnhancers = composeWithDevTools;
 
 export function configureStore(config) {
     return function (preloadedState) {
-        console.log("preloadedState", preloadedState);
         const reducer = createRootReducer(config);
-        //const middlewares = configureMiddleware(config);
-        //const enhancers = composeEnhancers(applyMiddleware(...middlewares));
-        const store = createStore(reducer, preloadedState);
-        console.log("store", store);
+        const middlewares = configureMiddleware(config);
+        const enhancers = composeEnhancers(applyMiddleware(...middlewares));
+        const store = createStore(reducer, preloadedState, enhancers);
         return store;
-    }
+    };
 }

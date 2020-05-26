@@ -6,10 +6,10 @@ import './components/register/registerForm.css';
 import './index.css';
 import Root from './components/Root';
 import { configureStore } from './store';
-import Ads from './components/adslist';
+import AdsService from './services/Ads';
 
 const history = createBrowserHistory();
-const store = configureStore({ Ads, history })();
+const store = configureStore({ AdsService, history })();
 
 ReactDOM.render(
   <Root store={store} history={history} />,
