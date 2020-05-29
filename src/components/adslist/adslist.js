@@ -1,42 +1,37 @@
 import React, { Component } from 'react';
-import Header from '../header/header';
+import AdsHeader from '../AdsHeader';
 import List from '../List';
+import { ADS_TAGS } from '../../constants';
 
-const goDetail = id => {
-    this.props.history.push({
-        pathname: '/detail',
-        state: {id: id}
-    })
-}
-
-const goEdit = id => {
-    this.props.history.push({
-        pathname: '/edit',
-        state: {id: id}
-    })
-}
-
-function AdsCard({ _id, name, photo, description, price}){
+function AdsCard({ _id, name, photo, description, price, history}){
     return (
         <div className="topPadding" key={_id}>
             <h2>{name}</h2>
             <img src={photo}></img>
             <p>{description}</p>
             <p>{price}€</p>
-            <button class="button" onClick={() => goDetail(_id)}>Detail</button>
-            <button class="button" onClick={() => goEdit(_id)}>Edit</button>
+            <button class="button" onClick={() => history.push({
+                pathname: '/detail',
+                state: {id: _id}
+            })}>Detail</button>
+            <button class="button" onClick={() => history.push({
+                pathname: "/edit",
+                state: {id: _id}
+            })}>Edit</button>
         </div>
     )
 }
 
-export default function AdsList({ ads }) {
+export default function AdsList({ 
+    ads, history, match: { params } 
+}) {
     return (
         <div>
-            <Header/>
+            <AdsHeader filter={params.filter || ADS_TAGS.all}/>
             <List
                 items={ads}
                 renderItem={ad => (
-                    <AdsCard {...ad} />
+                    <AdsCard {...ad} history={history} />
                 )}
             />
         </div>

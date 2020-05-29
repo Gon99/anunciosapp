@@ -5,11 +5,12 @@ import LoginForm from './components/login/loginForm';
 import AdsList from './components/adslist';
 import AdDetail from './components/addetail/addetail';
 import AdEdit from './components/adedit/adedit';
-import CreateAd from './components/createad/createad';
+import CreateAd from './components/createad';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { fetchAds } from './store/actions';
 //import { Router, Route, Switch } from 'react-router';
+import { ADS_TAGS } from './constants';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,17 +26,24 @@ function App() {
           <Route exact={true} path="/" component={LoginForm}/>
           <Route path="/register" component={RegisterForm}/>
           <Route
-            path="/ads"
+            path="/ads/:filter?"
             render={props => (
               <AdsList
-                tag="motor"
+                tag={props.match.params.filter || ADS_TAGS.all}
                 {...props}
               />
             )}
           ></Route>
           <Route path="/detail" component={AdDetail}/>
           <Route path="/edit" component={AdEdit}/>
-          <Route path="/createad" component={CreateAd}/>
+          <Route 
+            path="/createad"
+            render={props => (
+              <CreateAd 
+                {...props}
+              />
+            )}
+          />
           <Redirect to="/"/>
         </Switch>
       </Router>

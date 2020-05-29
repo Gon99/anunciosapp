@@ -1,11 +1,37 @@
 import React, { Component } from 'react';
 import api from '../api/api';
+import { Link } from "react-router-dom";
+import FilterButton from '../FilterButton';
+import { ADS_TAGS } from '../../constants';
 
 const { getTags } = api();
 const { filterAdByTag } = api();
 const { filterAdByName } = api();
 
-class Header extends Component{
+export default function AdsHeader() {
+    return (
+        <div className="main">
+            <h1>Filters</h1>
+            <FilterButton filter={ADS_TAGS.all}>
+                All
+            </FilterButton>
+            <FilterButton filter={ADS_TAGS.lifestyle}>
+                Lifestyle
+            </FilterButton>
+            <FilterButton filter={ADS_TAGS.mobile}>
+                Mobile
+            </FilterButton>
+            <FilterButton filter={ADS_TAGS.motor}>
+                Motor
+            </FilterButton>
+            <h1>Create your ad</h1>
+            <Link to="/createad">CreateAd</Link>
+            <h1>All Ads</h1>
+        </div>
+    );
+}
+
+/*class Header extends Component{
 
     constructor(){
         super();
@@ -62,10 +88,6 @@ class Header extends Component{
         })
     }
 
-    goCreateAd = () => {
-        this.props.history.push('/createad');
-    }
-
     render(){
         return (
             <div className="main">
@@ -81,12 +103,11 @@ class Header extends Component{
                 </form>
                 <br></br>
                 <h1>Create your ad</h1>
-                <button onClick={this.goCreateAd}>Create Ad</button>
+                <Link to="/createad">CreateAd</Link>
                 <h1>All Ads</h1>
-                {/*AdsList*/}
             </div>
         );
     }
 }
 
-export default Header;
+export default Header;*/

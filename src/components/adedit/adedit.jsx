@@ -1,9 +1,73 @@
-import React, { Component } from 'react';
-import api from '../api/api';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchEditAd, fetchGetTags } from '../../store/actions';
 
-const { updateAd, getTags } = api();
+function editAdRequest(event, data, dispatch) {
+    event.preventDefault();
+    dispatch(fetchEditAd(data));
+}
 
-class AdEdit extends Component {
+export default function AdEdit() {
+    const dispatch = useDispatch();
+    const [state, setState] = useState({
+        name: "",
+        description: "",
+        tag: "lifestyle",
+        type: "buy",
+        price: "",
+        photo: ""
+    });
+
+    const [tags, setTags] = useState([]);
+    useEffect(() => {
+        const tagsPromise = dispatch(fetchGetTags());
+        tagsPromise.then(tags => {
+            const filteredTags = tags.filter((el) => el != null);
+            setTags(filteredTags);
+        })
+    }, [dispatch])
+    console.log("state que se envia", state);
+    return (
+        <div className="main topPadding">
+            <h1>Edit Advertisement</h1>
+            <form onSubmit={(e) => editAdRequest(e, state, dispatch)}>
+                <label>New name </label>
+                <input placeholder="Ad name" type="text" name="name" onChange={(e) => setState({...state, name: e.target.value})}/>
+                <br></br>
+                <br></br>
+                <label>New Photo </label>
+                <input type="text" name="photo" placeholder="URL Image" onChange={(e) => setState({...state, photo: e.target.value})}/>
+                <br></br>
+                <br></br>
+                <label>New description </label>
+                <input placeholder="Description" name="description" onChange={(e) => setState({...state, description: e.target.value})}></input>
+                <br></br>
+                <br></br>
+                <label>New tag </label>
+                <select name="tag" onChange={e => setState({...state, tag: e.target.value})}>{tags.map((tag, y)=>
+                    <option key={y}>{tag}</option>
+                )}</select>
+                <br></br>
+                <br></br>
+                <label>New type </label>
+                <select name="type" onChange={e => setState({...state, type: e.target.value})}>
+                    <option key="buy">buy</option>
+                    <option key="sell">sell</option>
+                </select>
+                <br></br>
+                <br></br>
+                <label>New price</label>
+                <input placeholder="Price" type="text" name="price" pattern="[0-9]*" onChange={e => setState({...state, price:e.target.value})}></input>
+                <br></br>
+                <br></br>
+                {/*<button onClick={this.goBack}>Back</button>*/}
+            <input type="submit" value="Edit"/>
+            </form>
+        </div>
+    )
+}
+
+/*class AdEdit extends Component {
     constructor(props){
         super();
 
@@ -101,4 +165,4 @@ class AdEdit extends Component {
     }
 }
 
-export default AdEdit;
+export default AdEdit;*/
