@@ -10,11 +10,11 @@ function AdsCard({ _id, name, photo, description, price, history}){
             <img src={photo}></img>
             <p>{description}</p>
             <p>{price}€</p>
-            <button class="button" onClick={() => history.push({
+            <button className="button" onClick={() => history.push({
                 pathname: '/detail',
                 state: {id: _id}
             })}>Detail</button>
-            <button class="button" onClick={() => history.push({
+            <button className="button" onClick={() => history.push({
                 pathname: "/edit",
                 state: {id: _id}
             })}>Edit</button>

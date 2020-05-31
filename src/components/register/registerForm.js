@@ -57,10 +57,10 @@ class RegisterUser extends Component {
       <div className="center">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          <div class="inputDiv">
+          <div className="inputDiv">
             <input placeholder="Write your username" type="text" name="username" value={this.state.name} onChange={this.handleUserInput}/>
           </div>
-          <div class="inputDiv">
+          <div className="inputDiv">
             <input placeholder="Write your password" type="password" name="password" value={this.state.password} onChange={this.handleUserInput}/>
           
           <input className="submit" type="submit" value="Submit"/>

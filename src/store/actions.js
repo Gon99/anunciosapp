@@ -69,15 +69,15 @@ export const editAdSuccess = () => ({
     type: TYPES.EDIT_AD_SUCCESS,
 })    
 
-export const fetchEditAd = (data) =>
+export const fetchEditAd = (id, data) =>
     async function (dispatch, getState, { history }) {
         dispatch(editAdRequest());
         try {
             console.log("data que llega", data);
-            const response = await api().updateAd(data);
+            const response = await api().updateAd(id,data);
             console.log("la respuesta edicion", response);
             dispatch(editAdSuccess());
-            //history.push('/ads');
+            history.push('/ads');
         } catch (error) {
             dispatch(tagsFailure(error))
         }

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchEditAd, fetchGetTags } from '../../store/actions';
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-function editAdRequest(event, data, dispatch) {
+function editAdRequest(event, data, dispatch, id) {
     event.preventDefault();
-    dispatch(fetchEditAd(data));
+    dispatch(fetchEditAd(id,data));
 }
 
 export default function AdEdit() {
     const dispatch = useDispatch();
-
+    const location = useLocation();
+    const id = location.state.id;
     const [state, setState] = useState({
         name: "",
         description: "",
@@ -32,7 +33,7 @@ export default function AdEdit() {
     return (
         <div className="main topPadding">
             <h1>Edit Advertisement</h1>
-            <form onSubmit={(e) => editAdRequest(e, state, dispatch)}>
+            <form onSubmit={(e) => editAdRequest(e, state, dispatch, id)}>
                 <label>New name </label>
                 <input placeholder="Ad name" type="text" name="name" onChange={(e) => setState({...state, name: e.target.value})}/>
                 <br></br>
