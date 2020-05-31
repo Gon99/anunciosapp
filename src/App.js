@@ -6,7 +6,7 @@ import AdsList from './components/adslist';
 import AdDetail from './components/addetail/addetail';
 import AdEdit from './components/adedit/adedit';
 import CreateAd from './components/createad';
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import { Router, Route, Redirect, Switch } from "react-router-dom";
 //import { ConnectedRouter as Router } from 'connected-react-router';
 import { useDispatch } from 'react-redux';
 import { fetchAds } from './store/actions';
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <ErrorHandler>
-      <Router history={history}>
+
         <Switch>
           <Route exact={true} path="/" component={LoginForm}/>
           <Route path="/register" component={RegisterForm}/>
@@ -47,7 +47,7 @@ function App() {
           />
           <Redirect to="/"/>
         </Switch>
-      </Router>
+
     </ErrorHandler>
   );
 }

@@ -18,7 +18,7 @@ const store = mockStore({});
 
 describe('actions', () => {
     describe('fetchAds', () => {
-        it('should dispatch FETCH_ADS_REQUEST and FETCH_ADS_SUCCESS actions', async () => {
+        it('should dispatch FETCH_ADS_REQUEST and FETCH_ADS_SUCCESS actions',async () => {
             const dispatch = jest.fn();
             const action = actions
             const getState = () => {};

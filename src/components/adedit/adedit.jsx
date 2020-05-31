@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchEditAd, fetchGetTags } from '../../store/actions';
+import { useHistory } from "react-router-dom";
 
 function editAdRequest(event, data, dispatch) {
     event.preventDefault();
@@ -9,6 +10,7 @@ function editAdRequest(event, data, dispatch) {
 
 export default function AdEdit() {
     const dispatch = useDispatch();
+
     const [state, setState] = useState({
         name: "",
         description: "",
@@ -17,7 +19,7 @@ export default function AdEdit() {
         price: "",
         photo: ""
     });
-
+    
     const [tags, setTags] = useState([]);
     useEffect(() => {
         const tagsPromise = dispatch(fetchGetTags());
@@ -26,7 +28,7 @@ export default function AdEdit() {
             setTags(filteredTags);
         })
     }, [dispatch])
-    console.log("state que se envia", state);
+
     return (
         <div className="main topPadding">
             <h1>Edit Advertisement</h1>

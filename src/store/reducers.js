@@ -13,10 +13,6 @@ export function advertisements(state = initialState.ads, action) {
     switch(action.type) {
         case TYPES.FETCH_ADS_SUCCESS:
             return action.ads;
-        case TYPES.CREATE_AD_SUCCESS:
-            return action.createdAd;
-        case TYPES.EDIT_AD_SUCCESS:
-            return action.editedAd;
         default:
             return state;
     }

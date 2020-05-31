@@ -48,7 +48,7 @@ export const fetchCreateAd = (data) =>
     async function (dispatch, getState, { history }) {
         dispatch(createAdRequest());
         try {
-            await api().createAd(data.state);
+            await api().createAd(data);
             dispatch(createAdSuccess(data.state));
             history.push('/ads');
         } catch (error) {
@@ -65,18 +65,19 @@ export const editAdFailure = error => ({
     error
 });
 
-export const editAdSuccess = editedAd => ({
+export const editAdSuccess = () => ({
     type: TYPES.EDIT_AD_SUCCESS,
-    editedAd
 })    
 
 export const fetchEditAd = (data) =>
     async function (dispatch, getState, { history }) {
         dispatch(editAdRequest());
         try {
-            await api().updateAd(data);
-            dispatch(editAdSuccess(data));
-            history.push('/ads');
+            console.log("data que llega", data);
+            const response = await api().updateAd(data);
+            console.log("la respuesta edicion", response);
+            dispatch(editAdSuccess());
+            //history.push('/ads');
         } catch (error) {
             dispatch(tagsFailure(error))
         }

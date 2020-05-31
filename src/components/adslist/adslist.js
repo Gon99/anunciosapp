@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import AdsHeader from '../AdsHeader';
 import List from '../List';
 import { ADS_TAGS } from '../../constants';
