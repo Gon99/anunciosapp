@@ -10,6 +10,10 @@ export const EDIT_AD_REQUEST = 'EDIT_AD_REQUEST';
 export const EDIT_AD_SUCCESS = 'EDIT_AD_SUCCESS';
 export const EDIT_AD_FAILURE = 'EDIT_AD_FAILURE';
 
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+
 export const TAGS_REQUEST = 'TAGS_REQUEST';
 export const TAGS_SUCCESS = 'TAGS_SUCCESS';
 export const TAGS_FAILURE = 'TAGS_FAILURE';

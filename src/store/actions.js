@@ -3,7 +3,7 @@ import * as TYPES from './types';
 import AdsService from '../services/Ads';
 import api from '../components/api/api';
 
-const { getAds, createAd, getTags, updateAd } = api();
+//const { getAds, createAd, getTags, updateAd, loginUser} = api();
 
 export const fetchAdsRequest = () => ({
     type: TYPES.FETCH_ADS_REQUEST
@@ -23,7 +23,7 @@ export const fetchAds = () =>
     async function (dispatch, getState) {
         dispatch(fetchAdsRequest());
         try {
-            const ads = await getAds();
+            const ads = await api().getAds();
             dispatch(fetchAdsSuccess(ads));
         } catch (error) {
             dispatch(fetchAdsFailure(error));
@@ -39,16 +39,17 @@ export const createAdFailure = error => ({
     error
 });
 
-export const createAdSuccess = () => ({
+export const createAdSuccess = createdAd => ({
     type: TYPES.CREATE_AD_SUCCESS,
+    createdAd
 })
 
 export const fetchCreateAd = (data) => 
     async function (dispatch, getState, { history }) {
         dispatch(createAdRequest());
         try {
-            await createAd(data.state);
-            dispatch(createAdSuccess());
+            await api().createAd(data.state);
+            dispatch(createAdSuccess(data.state));
             history.push('/ads');
         } catch (error) {
             dispatch(createAdFailure(error));
@@ -64,19 +65,46 @@ export const editAdFailure = error => ({
     error
 });
 
-export const editAdSuccess = () => ({
+export const editAdSuccess = editedAd => ({
     type: TYPES.EDIT_AD_SUCCESS,
+    editedAd
 })    
 
 export const fetchEditAd = (data) =>
     async function (dispatch, getState, { history }) {
         dispatch(editAdRequest());
         try {
-            await updateAd(data);
-            dispatch(editAdSuccess());
+            await api().updateAd(data);
+            dispatch(editAdSuccess(data));
             history.push('/ads');
         } catch (error) {
             dispatch(tagsFailure(error))
+        }
+    }
+
+export const loginUserRequest = () => ({
+    type: TYPES.LOGIN_REQUEST
+});
+
+export const loginUserFailure = error => ({
+    type: TYPES.LOGIN_FAILURE,
+    error
+});
+
+export const loginUserSuccess = username => ({
+    type: TYPES.LOGIN_SUCCESS,
+    username
+})    
+
+export const fetchLoginUser = data =>
+    async function (dispatch, getState, { history }) {
+        dispatch(loginUserRequest());
+        try {
+            await api().loginUser(data);
+            dispatch(loginUserSuccess(data.username));
+            history.push('/ads');
+        } catch (error) {
+            dispatch(loginUserFailure(error));
         }
     }
 
@@ -98,7 +126,7 @@ export const fetchGetTags = () =>
     async function (dispatch, getState) {
         dispatch(tagsRequest());
         try {
-            const tags = await getTags();
+            const tags = await api().getTags();
             dispatch(tagsSuccess(tags));
             return tags;
         } catch (error) {

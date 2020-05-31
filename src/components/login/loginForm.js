@@ -1,12 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import api from '../api/api';
 import { BrowserRouter as Link, withRouter } from "react-router-dom";
 import './loginForm.css';
+import { useDispatch } from 'react-redux';
+import { fetchLoginUser } from '../../store/actions';
 
-//const axios = require('axios').default;
-const { loginUser } = api();
+function loginUserRequest(event, data, dispatch) {
+  event.preventDefault();
+  dispatch(fetchLoginUser(data));
+}
 
-class LoginUser extends Component {
+export default function LoginUser(){
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    username: "",
+    password: ""
+  });
+
+  return (
+    <div className="center">
+        <h1>Login</h1>
+        <form onSubmit={e => loginUserRequest(e, state, dispatch)}>
+          <div className="inputDiv">
+            <input placeholder="Write your username" type="text" name="username" onChange={e => setState({...state, username: e.target.value})}/>
+          </div>
+          <div className="inputDiv">
+            <input placeholder="Write your password" type="password" name="password" onChange={e => setState({...state, password: e.target.value})}/>
+          </div>
+          <input className="submit" type="submit" value="Submit"/>
+        </form>
+      </div>
+  );
+}
+/*class LoginUser extends Component {
   constructor(props) {
     super(props);
 
@@ -72,4 +98,4 @@ class LoginUser extends Component {
   }
 }
 
-export default withRouter(LoginUser);
+export default withRouter(LoginUser);*/
